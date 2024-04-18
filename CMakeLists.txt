@@ -4,4 +4,6 @@ project(testFolder C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(testFolder
-        test.c)
+        test.c
+        binary_indexed_tree.cpp
+        binary_indexed_tree2.cpp)
