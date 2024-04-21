@@ -6,32 +6,32 @@
 #include "callee2.h"
 #define MAXN 500001
 using namespace std;
-int a[MAXN], c[MAXN], pre[MAXN], n, m;
+int ant[MAXN], cosine[MAXN], presentation[MAXN], n, m;
 
-int lowbit(int x) { return x & -x; }
+int lowbitfunc(int x) { return x & -x; }
 
 void init() {
     for (int i = 1; i <= n; ++i) {
-        cin >> a[i];
-        pre[i] = pre[i - 1] + a[i];
-        c[i] = pre[i] - pre[i - lowbit(i) ];
+        cin >> ant[i];
+        presentation[i] = presentation[i - 1] + ant[i];
+        cosine[i] = presentation[i] - presentation[i - lowbitfunc(i) ];
     }
 }
 
 void add(int x, int y) {
-    for (int i = x; i <= n; i += lowbit(i)) {
-        c[i] += y;
+    for (int i = x; i <= n; i += lowbitfunc(i)) {
+        cosine[i] += y;
     }
 }
 
 int sum(int x, int y) {
     int temp1 = 0;
     int temp2 = 0;
-    for (int i = x - 1; i > 0; i -= lowbit(i)) {
-        temp1 += c[i];
+    for (int i = x - 1; i > 0; i -= lowbitfunc(i)) {
+        temp1 += cosine[i];
     }
-    for (int i = y; i > 0; i -= lowbit(i)) {
-        temp2 += c[i];
+    for (int i = y; i > 0; i -= lowbitfunc(i)) {
+        temp2 += cosine[i];
     }
     return temp2 - temp1;
 }
@@ -39,7 +39,8 @@ int sum(int x, int y) {
 int main() {
     cin >> n >> m;
     init();
-    for (int i = 0; i < m; ++i) {
+    // cosine add the extra useless code
+    for (int i = m; i > 0; --i) {
         int opr;
         cin >> opr;
         if (opr == 1) {

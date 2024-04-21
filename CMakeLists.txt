@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.27)
+project(testFolder C)
+
+set(CMAKE_C_STANDARD 11)
+
+add_executable(testFolder
+        test.c
+        binary_indexed_tree.cpp
+        binary_indexed_tree2.cpp)
